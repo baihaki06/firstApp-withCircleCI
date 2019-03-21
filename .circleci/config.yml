@@ -11,6 +11,11 @@ jobs :
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker --version
+      - run: docker swarm init
+      - run: sleep 90
+      - run: docker service ps bitroid_app
+      - run: docker service ls
+      - run: docker ps -a
       - run :
           name: buil images and push to DockerHub
           command: |
