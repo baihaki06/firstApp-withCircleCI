@@ -2,20 +2,20 @@ version : 2
 jobs :
   build: 
     docker :
-      - image : circleci/python:3.7
+      - image: circleci/python:3.7
     working_directory: ~/repo
     steps:
       - checkout
       - run
-          name : login DockerHub
-          command : |
+          name: login DockerHub
+          command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             #CEK IMAGE IN DOCKER
             docker images
       
       - run 
-          name : buil images and push to DockerHub
-          command : |
+          name: buil images and push to DockerHub
+          command: |
             docker build --tag=baihaki/appcircleci .
             docker push baihaki/appcircleci:${CIRCLE_SHA1}
 
