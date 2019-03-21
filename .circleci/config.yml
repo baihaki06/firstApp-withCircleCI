@@ -10,6 +10,8 @@ jobs :
           name: login DockerHub
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            sudo systemctl start docker
+            sudo systemctl enable docker
             docker run -d --name db baihaki/hellodocker:ujiversion
             docker images
       
