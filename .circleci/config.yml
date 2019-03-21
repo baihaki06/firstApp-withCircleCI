@@ -21,4 +21,4 @@ jobs:
      - run: 
           name: buil images and push to DockerHub
           command: |
-            docker push baihaki/appcircleci::$TAG .
+            docker push baihaki/appcircleci:$TAG .
