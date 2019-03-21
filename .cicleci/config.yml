@@ -10,7 +10,7 @@ jobs :
       - checkout
       - run
           name : login DockerHub
-          comamand : |
+          command : |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             #CEK IMAGE IN DOCKER
             docker images
