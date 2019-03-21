@@ -13,6 +13,5 @@ jobs:
      - run: 
           name: buil images and push to DockerHub
           command: |
-            sudo usermod -aG docker $USER
-            sudo docker build --tag=baihaki/appcircleci .
-            sudo docker push baihaki/appcircleci:${CIRCLE_SHA1}
+            docker build --tag=baihaki/appcircleci .
+            docker push baihaki/appcircleci:${CIRCLE_SHA1}
