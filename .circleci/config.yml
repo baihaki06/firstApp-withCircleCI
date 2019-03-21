@@ -13,6 +13,7 @@ jobs:
      - run: 
           name: buil images and push to DockerHub
           command: |
+            whoami
             sudo service docker restart
             docker build --tag=baihaki/appcircleci .
             docker push baihaki/appcircleci:${CIRCLE_SHA1}
