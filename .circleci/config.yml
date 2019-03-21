@@ -3,13 +3,14 @@ jobs :
   build: 
     docker :
       - image: circleci/python:3.7
-   # working_directory: ~/repo
+    working_directory: ~/repo
     steps:
       - checkout
       - run :
           name: login DockerHub
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker run -d --name db baihaki/hellodocker:ujiversion
             docker images
       
       - run :
