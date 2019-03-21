@@ -11,6 +11,7 @@ jobs :
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker --version
+            docker info
       - run :
           name: buil images and push to DockerHub
           command: |
