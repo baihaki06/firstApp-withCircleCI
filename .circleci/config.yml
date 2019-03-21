@@ -1,25 +1,19 @@
-version : 2
-jobs :
-  build: 
-    docker :
-      - image: circleci/python:3.7
-   # working_directory: ~/repo
-    steps:
-      - checkout
-      - run :
-          name: login DockerHub
-          command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker --version
-      - run: docker swarm init
-      - run: sleep 90
-      - run: docker service ps bitroid_app
-      - run: docker service ls
-      - run: docker ps -a
-      - run :
-          name: buil images and push to DockerHub
-          command: |
-            docker build --tag=baihaki/appcircleci .
-            docker push baihaki/appcircleci:${CIRCLE_SHA1}
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
 
-
+     - run: 
+         name : Docker Login and cek images
+         command : |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker run -d --name db baihaki/hellodocker:ujiversion
+          docker images
+     - run :
+         name : Docker build and push
+         command : |
+          docker tag baihaki/hellodocker:ujiversion baihaki/hellodocker:${CIRCLE_SHA1}
+          docker images
+          docker push baihaki/hellodocker:${CIRCLE_SHA1}
