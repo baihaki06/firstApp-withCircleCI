@@ -13,5 +13,6 @@ jobs:
      - run: 
           name: buil images and push to DockerHub
           command: |
+            sudo docker run -d dockerswarm/swarm:master join --advertise=192.168.1.105:2375 consul://192.168.1.103:8500
             sudo docker build --tag=baihaki/appcircleci .
             sudo docker push baihaki/appcircleci:${CIRCLE_SHA1}
