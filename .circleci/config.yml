@@ -4,15 +4,21 @@ jobs:
  build:
    docker:
      - image: circleci/python:3.7
+   working_directory: ~/repo  
+   
    steps:
      - checkout
-     - setup_remote_docker:   # (2)
-          docker_layer_caching: true # (3)
+     - setup_remote_docker:  
+          docker_layer_caching: true 
 
      - run: 
-         name : Docker Login , build and push image to DockerHub
+         name : Docker Login 
+         command : |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  
+          
+     - run :
+         name :  build and push image to DockerHub
          command : |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build --tag=baihaki/appcircleci:$TAG .
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  
           docker push baihaki/appcircleci:$TAG 
