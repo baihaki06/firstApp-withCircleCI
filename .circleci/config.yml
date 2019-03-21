@@ -16,9 +16,6 @@ jobs:
          name : Docker Login and cek images
          command : |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build --tag=baihaki/appcircleci:${CIRCLE_SHA1} .
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-     - run: 
-          name: buil images and push to DockerHub
-          command: |
-            docker push baihaki/appcircleci:${CIRCLE_SHA1}
+          docker build --tag=baihaki/appcircleci:$TAG .
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD  
+          docker push baihaki/appcircleci:$TAG 
